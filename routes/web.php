@@ -38,6 +38,18 @@ Route::get('/contactadfrfrtz-asd', [ContactController::class,'index'])->name('co
 //Category Controller
 Route::get('/category/all',[CategoryController::class, 'AllCat'])->name('all.category');
 Route::post('/category/add',[CategoryController::class, 'AddCat'])->name('store.category');
+// Edit and Update Category
+Route::get('/category/edit/{id}',[CategoryController::class, 'EditCat']);
+Route::post('/category/update/{id}',[CategoryController::class, 'UpdateCat']);
+
+// Softdelete Category
+Route::get('/softdelete/category/{id}',[CategoryController::class, 'SoftDelete']);
+
+// Permanent Delete Category
+Route::get('/softdelete/category/{id}',[CategoryController::class, 'SoftDelete']);
+
+// Restore Softdeleted Category Item
+Route::get('/pdelete/category/{id}',[CategoryController::class, 'Pdelete']);
 
 
 

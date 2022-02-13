@@ -14,4 +14,9 @@ class Category extends Model
       'user_id',
       'category_name',
     ];
+
+   // Only used for ELOQUENT ORM using the MOdels
+    public function user(){
+      return $this->hasOne(User::class, 'id','user_id');
+    }
 }

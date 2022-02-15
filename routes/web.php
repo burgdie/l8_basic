@@ -3,6 +3,7 @@
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\BrandController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\CategoryController;
 
@@ -34,8 +35,8 @@ Route::get('/about', function () {
 //     //echo "This is Contact Page";
 // });
 Route::get('/contactadfrfrtz-asd', [ContactController::class,'index'])->name('con');
-
-//Category Controller
+//***********************************************************/
+//*********  Start Routing Category Controller  *************/
 Route::get('/category/all',[CategoryController::class, 'AllCat'])->name('all.category');
 Route::post('/category/add',[CategoryController::class, 'AddCat'])->name('store.category');
 // Edit and Update Category
@@ -50,8 +51,21 @@ Route::get('/softdelete/category/{id}',[CategoryController::class, 'SoftDelete']
 
 // Restore Softdeleted Category Item
 Route::get('/pdelete/category/{id}',[CategoryController::class, 'Pdelete']);
+//*********  End Routing Category Controller  *************/
 
 
+//***********************************************************/
+//*********  Start Routing Brand Controller  ***************/
+Route::get('/brand/all', [BrandController:: class, 'AllBrand'])->name('all.brand');
+//   Add Brand to table
+Route::post('/brand/add', [BrandController::class, 'StoreBrand'])->name('store.brand');
+
+// Edit and Update Brand
+Route::get('/brand/edit/{id}',[BrandController::class, 'EditBrand']);
+Route::post('/brand/update/{id}',[BrandController::class, 'UpdateBrand']);
+
+
+//*********  End Routing Brand Controller  *************/
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     //Eloquent ORM Read Users Data

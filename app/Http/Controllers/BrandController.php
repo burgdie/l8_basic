@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 use App\Models\Brand;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use Image;
 
 class BrandController extends Controller
 {
@@ -14,6 +15,11 @@ class BrandController extends Controller
       return view('admin.brand.index', compact('brands'));
 
     }
+    /**
+     * StoreBrand
+     *
+     *
+     */
     public function StoreBrand(Request $request) {
       $validatedData = $request->validate([
         'brand_name' => 'required|unique:brands|min:4',
@@ -31,15 +37,19 @@ class BrandController extends Controller
 
       //Use Laravel function hexdec() to create image id when an image is uploaded
       //and after the original extensaion will be added
-      $name_gen = hexdec(uniqid());
-      // get extension of original image
-      $img_ext = strtolower($brand_image->getClientOriginalExtension());
-      $img_name = $name_gen.'.'.$img_ext;
+      // $name_gen = hexdec(uniqid());
+      // // get extension of original image
+      // $img_ext = strtolower($brand_image->getClientOriginalExtension());
+      // $img_name = $name_gen.'.'.$img_ext;
 
-      // Upload the image
-      $up_location ='image/brand/';
-      $last_img = $up_location.$img_name;
-      $brand_image->move($up_location,$img_name);
+      // // Upload the image
+      // $up_location ='image/brand/';
+      // $last_img = $up_location.$img_name;
+      // $brand_image->move($up_location,$img_name);
+
+      $name_gen = hexdec(uniqid()).'.'.$brand_image->getClientOriginalExtension();
+      Image::make($brand_image)->resize(300,200)->save('image/brand/'.$name_gen);
+      $last_img = 'image/brand/'.$name_gen;
 
       Brand::insert([
         'brand_name' => $request->brand_name,
@@ -110,11 +120,27 @@ class BrandController extends Controller
             return Redirect()->back()->with('success','Brand Update was  Successful');
 
         }
+    }
+    /**
+     *
+     *
+     */
+    public function DeleteBrand($id){
 
+      // Find image and delete image in local memory
+      $image = Brand::find($id);
+      $old_image = $image->brand_image;
+      unlink($old_image);
+
+      // Delete Brand tuple in Database
+      Brand::find($id)->delete();
+      return Redirect()->back()->with('success','Brand Delete was Successful');
 
 
 
     }
+
+
   }
 
 

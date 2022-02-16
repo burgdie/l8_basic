@@ -67,8 +67,15 @@ Route::post('/brand/update/{id}',[BrandController::class, 'UpdateBrand']);
 // Delete Brand
 Route::get('/brand/delete/{id}',[BrandController::class, 'DeleteBrand']);
 
-
 //*********  End Routing Brand Controller  *************/
+
+//***********************************************************/
+//*********  Start Routing Multi Image handling in Brand Controller***************/
+Route::get('/multi/image', [BrandController:: class, 'MultiPic'])->name('multi.image');
+Route::post('/multi/add', [BrandController::class, 'StoreImg'])->name('store.image');
+
+
+//*********  End Routing Multi Image Handling  *************/
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     //Eloquent ORM Read Users Data

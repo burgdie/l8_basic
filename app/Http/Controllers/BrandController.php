@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 
+use Image;
 use App\Models\Brand;
+use App\Models\Multipic;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
-use Image;
 
 class BrandController extends Controller
 {
@@ -135,13 +136,51 @@ class BrandController extends Controller
       // Delete Brand tuple in Database
       Brand::find($id)->delete();
       return Redirect()->back()->with('success','Brand Delete was Successful');
-
-
-
     }
 
+    /**
+     * Method for Multi Image handling
+     *
+     *
+     */
+
+    public function MultiPic(){
+
+      // Get all pictures
+      $images = Multipic::all();
+
+      return view('admin.multipic.index', compact('images'));
+    }
+
+    /**
+     * Method for Multi Image handling
+     *
+     *
+     */
+
+    public function StoreImg(Request $request){
+
+     $image = $request->file('image');
+
+     foreach($image as $multi_img) {
+
+        $name_gen = hexdec(uniqid()).'.'.$multi_img->getClientOriginalExtension();
+        Image::make($multi_img)->resize(300,200)->save('image/multi/'.$name_gen);
+
+        $last_img = 'image/multi/'.$name_gen;
+
+        Multipic::insert([
+
+          'image'=>$last_img,
+          'created_at' => Carbon::now()
+        ]);
+
+    }
+    //end foreach
+    return Redirect()->back()->with('success','brand Inserted Successfully');
 
   }
+}
 
 
 

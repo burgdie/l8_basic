@@ -1,10 +1,6 @@
-<x-app-layout>
-  <x-slot name="header">
-    <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-     All Brand
+@extends('admin.admin_master')
 
-    </h2>
-  </x-slot>
+@section('admin')
   <div class="py-12">
     <div class="container">
       <div class="row">
@@ -41,7 +37,7 @@
                     <th scope="row">{{ $brands->firstItem()+$loop->index }}</th>
                     <td>{{ $brand->brand_name}}</td>
                    {{-- Eloquent ORM --}}
-                  
+
                     <td><img src="{{ asset($brand->brand_image) }}" style="height: 40px; width:70px;" alt=""></td>
 
                    {{-- Querybuilder --}}
@@ -107,5 +103,5 @@
       </div>
     </div>
   </div>
+@endsection
 
-</x-app-layout>

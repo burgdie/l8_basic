@@ -33,25 +33,36 @@
             <a class="sidenav-item-link" href="javascript:void(0)" data-toggle="collapse" data-target="#dashboard"
               aria-expanded="false" aria-controls="dashboard">
               <i class="mdi mdi-view-dashboard-outline"></i>
-              <span class="nav-text">Dashboard</span> <b class="caret"></b>
+              <span class="nav-text">Home</span> <b class="caret"></b>
             </a>
             <ul  class="collapse show"  id="dashboard"
               data-parent="#sidebar-menu">
               <div class="sub-menu">
                 <li  class="active" >
                   <a class="sidenav-item-link" href="index.html">
-                    <span class="nav-text">Ecommerce</span>
+                    <span class="nav-text">Slider Menu</span>
 
                   </a>
                 </li>
-                <li >
-                  <a class="sidenav-item-link" href="analytics.html">
-                    <span class="nav-text">Analytics</span>
-
-                    <span class="badge badge-success">new</span>
+                <li  class="active" >
+                  <a class="sidenav-item-link" href="index.html">
+                    <span class="nav-text">Home About</span>
 
                   </a>
                 </li>
+                <li  class="active" >
+                  <a class="sidenav-item-link" href="index.html">
+                    <span class="nav-text">Home Portfolio</span>
+
+                  </a>
+                </li>
+                <li  class="active" >
+                  <a class="sidenav-item-link" href="{{ route('all.brand') }}">
+                    <span class="nav-text">Home Band</span>
+
+                  </a>
+                </li>
+
               </div>
             </ul>
           </li>
@@ -485,6 +496,6 @@
 
     <hr class="separator" />
 
-  
+
   </div>
 </aside>
